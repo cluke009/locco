@@ -4,31 +4,24 @@
 <head>
   <title>locco.lua</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="locco.css" />
+  <link rel="stylesheet" href="locco.css">
+  <link rel="stylesheet" href="monokai_sublime.css">
+  <script src="highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
   <div id="container">
     <div id="background"></div>
-    
-    <table cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th class="docs">
+
             <h1>
               locco.lua
             </h1>
-          </th>
-          <th class="code">
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-<tr id="section-1">
-<td class="docs">
-  <div class="pilwrap">
+<div class="section" id="section-1">
+<div class="docs">
     <a class="pilcrow" href="#section-1">&#182;</a>
-  </div>
-  
+
+
+
 <p><strong>Locco</strong> is a Lua port of <a href="http://jashkenas.github.com/docco/">Docco</a>,
 the quick-and-dirty, hundred-line-long, literate-programming-style
 documentation generator. It produces HTML that displays your comments
@@ -36,6 +29,8 @@ alongside your code. Comments are passed through
 <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, and code is
 syntax highlighted.
 This page is the result of running Locco against its own source file:</p>
+
+
 <pre><code>locco.lua locco.lua
 </code></pre>
 
@@ -47,9 +42,13 @@ up the code. As a markdown engine it ships with
 <a href="http://www.frykholm.se/files/markdown.lua">markdown.lua</a>. Otherwise there
 are no external dependencies.</p>
 
+
+
 <p>The generated HTML documentation for the given source files is saved
 into a <code>docs</code> directory. If you have Locco on your path you can run it from
 the command-line:</p>
+
+
 <pre><code>locco.lua project/*.lua
 </code></pre>
 
@@ -67,31 +66,35 @@ GitHub, and released under the MIT
 license.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>
-</pre></div>
-</td>
-</tr><tr id="section-2">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-2">
+<div class="docs">
     <a class="pilcrow" href="#section-2">&#182;</a>
-  </div>
-  
+
+
+
 <h3>Main Documentation Generation Functions</h3>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>
-</pre></div>
-</td>
-</tr><tr id="section-3">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-3">
+<div class="docs">
     <a class="pilcrow" href="#section-3">&#182;</a>
-  </div>
-  
+  <h2 class="funcName generate_documentation">generate_documentation</h2>
+
+
 <p>Generate the documentation for a source file by reading it in,
 splitting it up into comment/code sections, highlighting and merging
 them into an HTML template.<br>
@@ -102,23 +105,31 @@ Parameters:<br>
 <em>jump_to</em>: A HTML chunk with links to other documentation files.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">generate_documentation</span>(source, path, filename, jump_to)
+
+<p><span class ="paramdesc"><span class ="param param-todo">@todo</span><span class ="type type-todo"> - </span><span class ="param-desc param-desc-todo">write some documentation</p>
+
+<p></span>
+</span></p>
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">generate_documentation</span>(source, path, filename, jump_to)
   <span class="k">local</span> sections = parse(source)
   <span class="k">local</span> sections = highlight(sections)
   generate_html(source, path, filename, sections, jump_to)
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-4">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-4">
+<div class="docs">
     <a class="pilcrow" href="#section-4">&#182;</a>
-  </div>
-  
+  <h2 class="funcName parse">parse</h2>
+
+
 <p>Given a string of source code, parse out each comment and the code that
 follows it, and create an individual section for it. Sections take the form:</p>
+
+
 
 <pre><code>{
   docs_text = ...,
@@ -132,9 +143,11 @@ follows it, and create an individual section for it. Sections take the form:</p>
 <em>source</em>: The source file to process.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">parse</span>(source)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">parse</span>(source)
   <span class="k">local</span> sections = {}
   <span class="k">local</span> has_code = <span class="k">false</span>
   <span class="k">local</span> docs_text, code_text = <span class="s">''</span>, <span class="s">''</span>
@@ -159,14 +172,14 @@ follows it, and create an individual section for it. Sections take the form:</p>
                               [<span class="s">'code_text'</span>] = code_text }
   <span class="k">return</span> sections
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-5">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-5">
+<div class="docs">
     <a class="pilcrow" href="#section-5">&#182;</a>
-  </div>
-  
+  <h2 class="funcName highlight">highlight</h2>
+
+
 <p>Loop through a table of split sections and convert the documentation
 from Markdown to HTML and pass the code through Locco's syntax
 highlighting. Add  <em>docs_html</em> and <em>code_html</em> elements to the sections
@@ -175,23 +188,25 @@ Parameter:<br>
 <em>sections</em>: A table with split sections.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">highlight</span>(sections)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">highlight</span>(sections)
   <span class="k">for</span> i=1, #sections <span class="k">do</span>
-    sections[i][<span class="s">'docs_html'</span>] = markdown(sections[i][<span class="s">'docs_text'</span>])
+    sections[i][<span class="s">'docs_html'</span>] = highlight_doc(markdown(sections[i][<span class="s">'docs_text'</span>]),sections[i][<span class="s">'code_text'</span>])
     sections[i][<span class="s">'code_html'</span>] = highlight_lua(sections[i][<span class="s">'code_text'</span>])
   <span class="k">end</span>
   <span class="k">return</span> sections
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-6">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-6">
+<div class="docs">
     <a class="pilcrow" href="#section-6">&#182;</a>
-  </div>
-  
+  <h2 class="funcName generate_html">generate_html</h2>
+
+
 <p>After the highlighting is done, the template is filled with the documentation
 and code snippets and an HTML file is written.<br>
 Parameters:<br>
@@ -202,9 +217,11 @@ Parameters:<br>
 <em>jump_to</em>: A HTML chunk with links to other documentation files.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">generate_html</span>(source, path, filename, sections, jump_to)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">generate_html</span>(source, path, filename, sections, jump_to)
   f, err = io.open(path..<span class="s">'/'</span>..<span class="s">'docs/'</span>..filename:gsub(<span class="s">'lua$'</span>, <span class="s">'html'</span>), <span class="s">'wb'</span>)
   <span class="k">if</span> err <span class="k">then</span> <span class="nt">print</span>(err) <span class="k">end</span>
   <span class="k">local</span> h = template.header:gsub(<span class="s">'&#37;&#37;title&#37;&#37;'</span>, source)
@@ -219,138 +236,154 @@ Parameters:<br>
   f:write(template.footer)
   f:close()
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-7">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-7">
+<div class="docs">
     <a class="pilcrow" href="#section-7">&#182;</a>
-  </div>
-  
+
+
+
 <h3>Helpers &amp; Setup</h3>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>
-</pre></div>
-</td>
-</tr><tr id="section-8">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-8">
+<div class="docs">
     <a class="pilcrow" href="#section-8">&#182;</a>
-  </div>
-  
+
+
+
 <p>We need the script location to add the script's directory to the package
 path and to copy the style sheet from.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>script_path = arg[0]:match(<span class="s">'(.+)/.+'</span>)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">script_path = arg[0]:match(<span class="s">'(.+)/.+'</span>)
 package.path = table.concat({
   script_path..<span class="s">'/?.lua'</span>,
   package.path
 }, <span class="s">';'</span>);
-</pre></div>
-</td>
-</tr><tr id="section-9">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-9">
+<div class="docs">
     <a class="pilcrow" href="#section-9">&#182;</a>
-  </div>
-  
+
+
+
 <p>Load markdown.lua. It creates a global <code>markdown</code> function</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="nt">require</span> <span class="s">'markdown'</span>
-</pre></div>
-</td>
-</tr><tr id="section-10">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="nt">require</span> <span class="s">'markdown'</span>
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-10">
+<div class="docs">
     <a class="pilcrow" href="#section-10">&#182;</a>
-  </div>
-  
+
+
+
 <p>Load Lua Balanced.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>lb = <span class="nt">require</span>(<span class="s">'luabalanced'</span>)
-</pre></div>
-</td>
-</tr><tr id="section-11">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">lb = <span class="nt">require</span>(<span class="s">'luabalanced'</span>)
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-11">
+<div class="docs">
     <a class="pilcrow" href="#section-11">&#182;</a>
-  </div>
-  
+
+
+
 <p>Load HTML templates.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="nt">require</span> <span class="s">'template'</span>
-</pre></div>
-</td>
-</tr><tr id="section-12">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="nt">require</span> <span class="s">'template'</span>
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-12">
+<div class="docs">
     <a class="pilcrow" href="#section-12">&#182;</a>
-  </div>
-  
+  <h2 class="funcName ensure_directory">ensure_directory</h2>
+
+
 <p>Ensure the <code>docs</code> directory exists and return the <em>path</em> of the source file.<br>
 Parameter:<br>
 <em>source</em>: The source file for which documentation is generated.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">ensure_directory</span>(source)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">ensure_directory</span>(source)
   <span class="k">local</span> path = source:match(<span class="s">'(.+)/.+$'</span>)
   <span class="k">if</span> <span class="o">not</span> path <span class="k">then</span> path = <span class="s">'.'</span> <span class="k">end</span>
   os.execute(<span class="s">'mkdir -p '</span>..path..<span class="s">'/docs'</span>)
   <span class="k">return</span> path
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-13">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-13">
+<div class="docs">
     <a class="pilcrow" href="#section-13">&#182;</a>
-  </div>
-  
+  <h2 class="funcName escape">escape</h2>
+
+
 <p>Insert HTML entities in a string.<br>
 Parameter:<br>
 <em>s</em>: String to escape.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">escape</span>(s)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">escape</span>(s)
   s = s:gsub(<span class="s">'&lt;'</span>, <span class="s">'&lt;'</span>)
   s = s:gsub(<span class="s">'&gt;'</span>, <span class="s">'&gt;'</span>)
   s = s:gsub(<span class="s">'&#37;&#37;'</span>, <span class="s">'&#37;'</span>)
   <span class="k">return</span> s
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-14">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-14">
+<div class="docs">
     <a class="pilcrow" href="#section-14">&#182;</a>
-  </div>
-  
+
+
+
 <p>Define the Lua keywords, built-in functions and operators that should
 be highlighted.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">local</span> keywords = { <span class="s">'break'</span>, <span class="s">'do'</span>, <span class="s">'else'</span>, <span class="s">'elseif'</span>, <span class="s">'end'</span>, <span class="s">'false'</span>, <span class="s">'for'</span>,
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">local</span> keywords = { <span class="s">'break'</span>, <span class="s">'do'</span>, <span class="s">'else'</span>, <span class="s">'elseif'</span>, <span class="s">'end'</span>, <span class="s">'false'</span>, <span class="s">'for'</span>,
                    <span class="s">'function'</span>, <span class="s">'if'</span>, <span class="s">'in'</span>, <span class="s">'local'</span>, <span class="s">'nil'</span>, <span class="s">'repeat'</span>, <span class="s">'return'</span>,
                    <span class="s">'then'</span>, <span class="s">'true'</span>, <span class="s">'until'</span>, <span class="s">'while'</span> }
 <span class="k">local</span> functions = { <span class="s">'assert'</span>, <span class="s">'collectgarbage'</span>, <span class="s">'dofile'</span>, <span class="s">'error'</span>, <span class="s">'getfenv'</span>,
@@ -359,14 +392,14 @@ be highlighted.</p>
                     <span class="s">'rawget'</span>, <span class="s">'rawset'</span>, <span class="s">'require'</span>, <span class="s">'setfenv'</span>, <span class="s">'setmetatable'</span>,
                     <span class="s">'tonumber'</span>, <span class="s">'tostring'</span>, <span class="s">'type'</span>, <span class="s">'unpack'</span>, <span class="s">'xpcall'</span> }
 <span class="k">local</span> operators = { <span class="s">'and'</span>, <span class="s">'not'</span>, <span class="s">'or'</span> }
-</pre></div>
-</td>
-</tr><tr id="section-15">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-15">
+<div class="docs">
     <a class="pilcrow" href="#section-15">&#182;</a>
-  </div>
-  
+  <h2 class="funcName wrap_in_span">wrap_in_span</h2>
+
+
 <p>Wrap an item from a list of Lua keywords in a span template or return the
 unchanged item.<br>
 Parameters:<br>
@@ -375,9 +408,11 @@ Parameters:<br>
 <em>span_class</em>: Style sheet class.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">wrap_in_span</span>(item, item_list, span_class)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">wrap_in_span</span>(item, item_list, span_class)
   <span class="k">for</span> i=1, #item_list <span class="k">do</span>
     <span class="k">if</span> item_list[i] == item <span class="k">then</span>
       item = <span class="s">'&lt;span class="'</span>..span_class..<span class="s">'"&gt;'</span>..item..<span class="s">'&lt;/span&gt;'</span>
@@ -386,14 +421,14 @@ Parameters:<br>
   <span class="k">end</span>
   <span class="k">return</span> item
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-16">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-16">
+<div class="docs">
     <a class="pilcrow" href="#section-16">&#182;</a>
-  </div>
-  
+  <h2 class="funcName highlight_lua">highlight_lua</h2>
+
+
 <p>Quick and dirty source code highlighting. A chunk of code is split into
 comments (at the end of a line), strings and code using the
 <a href="https://github.com/davidm/lua-balanced/blob/master/luabalanced.lua">Lua Balanced</a>
@@ -404,9 +439,11 @@ Parameter:<br>
 <em>code</em>: Chunk of code to highlight.<br></p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">function</span> <span class="nf">highlight_lua</span>(code)
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">highlight_lua</span>(code)
     <span class="k">local</span> out = lb.gsub(code,
       <span class="k">function</span>(u, s)
         <span class="k">local</span> sout
@@ -415,50 +452,56 @@ Parameter:<br>
         <span class="k">elseif</span> u == <span class="s">'s'</span> <span class="k">then</span> <span class="c">-- Strings.
 </span>          sout = <span class="s">'&lt;span class="s"&gt;'</span>..escape(s)..<span class="s">'&lt;/span&gt;'</span>
         <span class="k">elseif</span> u == <span class="s">'e'</span> <span class="k">then</span> <span class="c">-- Code.
-</span></pre></div>
-</td>
-</tr><tr id="section-17">
-<td class="docs">
-  <div class="pilwrap">
+</span></code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-17">
+<div class="docs">
     <a class="pilcrow" href="#section-17">&#182;</a>
-  </div>
-  
+  <h2 class="funcName "></h2>
+
+
 <p>First highlight function names.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>          s = s:gsub(<span class="s">'function ([&#37;w_:&#37;.]+)'</span>, <span class="s">'function &lt;span class="nf"&gt;&#37;1&lt;/span&gt;'</span>)
-</pre></div>
-</td>
-</tr><tr id="section-18">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">          s = s:gsub(<span class="s">'function ([&#37;w_:&#37;.]+)'</span>, <span class="s">'function &lt;span class="nf"&gt;&#37;1&lt;/span&gt;'</span>)
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-18">
+<div class="docs">
     <a class="pilcrow" href="#section-18">&#182;</a>
-  </div>
-  
+
+
+
 <p>There might be a non-keyword at the beginning of the snippet.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>          sout = s:match(<span class="s">'^(&#37;A+)'</span>) <span class="o">or</span> <span class="s">''</span>
-</pre></div>
-</td>
-</tr><tr id="section-19">
-<td class="docs">
-  <div class="pilwrap">
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">          sout = s:match(<span class="s">'^(&#37;A+)'</span>) <span class="o">or</span> <span class="s">''</span>
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-19">
+<div class="docs">
     <a class="pilcrow" href="#section-19">&#182;</a>
-  </div>
-  
+
+
+
 <p>Iterate through Lua items and try to wrap operators,
 keywords and built-in functions in span elements.
 If nothing was highlighted go to the next category.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>          <span class="k">for</span> item, sep <span class="k">in</span> s:gmatch(<span class="s">'([&#37;a_]+)(&#37;A+)'</span>) <span class="k">do</span>
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">          <span class="k">for</span> item, sep <span class="k">in</span> s:gmatch(<span class="s">'([&#37;a_]+)(&#37;A+)'</span>) <span class="k">do</span>
             <span class="k">local</span> span, n = wrap_in_span(item, operators, <span class="s">'o'</span>)
             <span class="k">if</span> span == item <span class="k">then</span>
               span, n = wrap_in_span(item, keywords, <span class="s">'k'</span>)
@@ -471,37 +514,82 @@ If nothing was highlighted go to the next category.</p>
         <span class="k">end</span>
         <span class="k">return</span> sout
       <span class="k">end</span>)
-      out = <span class="s">'&lt;div class="highlight"&gt;&lt;pre&gt;'</span>..out..<span class="s">'&lt;/pre&gt;&lt;/div&gt;'</span>
+      out = <span class="s">'&lt;pre&gt;&lt;code class=" hljs lua"&gt;'</span>..out..<span class="s">'&lt;/code&gt;&lt;/pre&gt;'</span>
     <span class="k">return</span> out
   <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-20">
-<td class="docs">
-  <div class="pilwrap">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-20">
+<div class="docs">
     <a class="pilcrow" href="#section-20">&#182;</a>
-  </div>
-  
+  <h2 class="funcName highlight_doc">highlight_doc</h2>
+
+
+
+<p><span class ="paramdesc"><span class ="param param-doc">@doc</span><span class ="type type-doc"> (string)
+</span><span class ="param-desc param-desc-doc"> wrap args and types in spans
+</span><span class ="param param-code">@code</span><span class ="type type-code"> (string)
+</span><span class ="param-desc param-desc-code"> pull out function names if exist</p>
+
+<p></span></p>
+
+<p></span></p>
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">function</span> <span class="nf">highlight_doc</span>(doc, code)
+  <span class="k">local</span> out = <span class="s">''</span>
+  <span class="k">local</span> _,func,_ = code:match(<span class="s">'(function+)(.-)(&#37;()'</span>)
+  <span class="k">if</span> func <span class="k">then</span>
+    <span class="k">local</span> f = func:gsub(<span class="s">'&#37;s+'</span>,<span class="s">''</span>)
+    out = <span class="s">'&lt;h2 class="funcName '</span> .. f .. <span class="s">'"&gt;'</span> .. f .. <span class="s">'&lt;/h2&gt;'</span>
+  <span class="k">end</span>
+
+  <span class="k">local</span> <span class="k">function</span> <span class="nf">sani</span>(str)
+    <span class="k">return</span> str:gsub(<span class="s">'@'</span>,<span class="s">''</span>)
+  <span class="k">end</span>
+  doc = doc:gsub(<span class="s">'(@.+)'</span>,<span class="s">'&lt;span class ="paramdesc"&gt;&#37;1&lt;/span&gt;'</span>)
+  <span class="k">local</span> p1 = <span class="s">'&lt;span class ="param param-&#37;1"&gt;&#37;1&lt;/span&gt;&lt;span class ="type type-&#37;1"&gt;'</span>
+  <span class="k">local</span> p2 =<span class="s">'&#37;2&lt;/span&gt;&lt;span class ="param-desc param-desc-&#37;1"&gt;&#37;3&lt;/span&gt;'</span>
+  doc = doc:gsub(<span class="s">'(@&#37;S+)(.-&#37;S&#37;s)(.-[$\n])'</span>,p1..p2)
+  doc = doc:gsub(<span class="s">'(&#37;).-)(^@)'</span>,<span class="s">'&lt;span class ="desc '</span> .. <span class="s">''</span>..<span class="s">'"&gt;&#37;1&lt;/span&gt;'</span>)
+  doc = doc:gsub(<span class="s">'-@'</span>,<span class="s">'-'</span>)
+
+  out = out .. markdown(doc)
+  <span class="k">return</span> out
+<span class="k">end</span>
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-21">
+<div class="docs">
+    <a class="pilcrow" href="#section-21">&#182;</a>
+
+
+
 <p>Run the script.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre>
-</pre></div>
-</td>
-</tr><tr id="section-21">
-<td class="docs">
-  <div class="pilwrap">
-    <a class="pilcrow" href="#section-21">&#182;</a>
-  </div>
-  
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua">
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-22">
+<div class="docs">
+    <a class="pilcrow" href="#section-22">&#182;</a>
+
+
+
 <p>Generate HTML links to other files in the documentation.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">local</span> jump_to = <span class="s">''</span>
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">local</span> jump_to = <span class="s">''</span>
 <span class="k">if</span> #arg > 1 <span class="k">then</span>
   jump_to = template.jump_start
   <span class="k">for</span> i=1, #arg <span class="k">do</span>
@@ -513,31 +601,34 @@ If nothing was highlighted go to the next category.</p>
   <span class="k">end</span>
   jump_to = jump_to..template.jump_end
 <span class="k">end</span>
-</pre></div>
-</td>
-</tr><tr id="section-22">
-<td class="docs">
-  <div class="pilwrap">
-    <a class="pilcrow" href="#section-22">&#182;</a>
-  </div>
-  
+</code></pre>
+</div>
+</div><div class="clear"></div><div class="section" id="section-23">
+<div class="docs">
+    <a class="pilcrow" href="#section-23">&#182;</a>
+
+
+
 <p>Make sure the output directory exists, generate the HTML files for each
 source file, print what's happening and copy the style sheet.</p>
 
 
-</td>
-<td class="code">
-  <div class="highlight"><pre><span class="k">local</span> path = ensure_directory(arg[1])
+
+
+</div>
+<div class="codes">
+  <pre><code class=" hljs lua"><span class="k">local</span> path = ensure_directory(arg[1])
 <span class="k">for</span> i=1, #arg <span class="k">do</span>
   <span class="k">local</span> filename = arg[i]:match(<span class="s">'.+/(.+)$'</span>) <span class="o">or</span> arg[i]
   generate_documentation(arg[i], path, filename, jump_to)
   <span class="nt">print</span>(arg[i]..<span class="s">' --&gt; '</span>..path..<span class="s">'/docs/'</span>..filename:gsub(<span class="s">'lua$'</span>, <span class="s">'html'</span>))
 <span class="k">end</span>
-os.execute(<span class="s">'cp '</span>..script_path..<span class="s">'/locco.css '</span>..path..<span class="s">'/docs'</span>)
-</pre></div>
-</td>
-</tr></tbody>
-    </table>
+<span class="k">for</span> i,v <span class="k">in</span> <span class="nt">ipairs</span>(template.includes) <span class="k">do</span>
+  os.execute(<span class="s">'cp '</span>..script_path..<span class="s">'/'</span>.. v..<span class="s">' '</span>..path..<span class="s">'/docs'</span>)
+<span class="k">end</span>
+</code></pre>
+</div>
+</div><div class="clear"></div></tbody>
   </div>
 </body>
 </html>
