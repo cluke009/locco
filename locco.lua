@@ -44,6 +44,8 @@
 -- _path_: Path of the source file.<br>
 -- _filename_: The filename of the source file.<br>
 -- _jump\_to_: A HTML chunk with links to other documentation files.
+--
+-- @todo - write some documentation
 function generate_documentation(source, path, filename, jump_to)
   local sections = parse(source)
   local sections = highlight(sections)
@@ -96,7 +98,7 @@ end
 -- _sections_: A table with split sections.<br>
 function highlight(sections)
   for i=1, #sections do
-    sections[i]['docs_html'] = markdown(sections[i]['docs_text'])
+    sections[i]['docs_html'] = highlight_doc(markdown(sections[i]['docs_text']),sections[i]['code_text'])
     sections[i]['code_html'] = highlight_lua(sections[i]['code_text'])
   end
   return sections
@@ -227,10 +229,37 @@ function highlight_lua(code)
         end
         return sout
       end)
-      out = '<div class="highlight"><pre>'..out..'</pre></div>'
+      out = '<pre><code class=" hljs lua">'..out..'</code></pre>'
     return out
   end
 
+--
+-- @doc (string)
+--  wrap args and types in spans
+-- @code (string)
+--  pull out function names if exist
+--
+function highlight_doc(doc, code)
+  local out = ''
+  local _,func,_ = code:match('(function+)(.-)(%()')
+  if func then
+    local f = func:gsub('%s+','')
+    out = '<h2 class="funcName ' .. f .. '">' .. f .. '</h2>'
+  end
+
+  local function sani(str)
+    return str:gsub('@','')
+  end
+  doc = doc:gsub('(@.+)','<span class ="paramdesc">%1</span>')
+  local p1 = '<span class ="param param-%1">%1</span><span class ="type type-%1">'
+  local p2 ='%2</span><span class ="param-desc param-desc-%1">%3</span>'
+  doc = doc:gsub('(@%S+)(.-%S%s)(.-[$\n])',p1..p2)
+  doc = doc:gsub('(%).-)(^@)','<span class ="desc ' .. ''..'">%1</span>')
+  doc = doc:gsub('-@','-')
+
+  out = out .. markdown(doc)
+  return out
+end
 -- Run the script.
 
 -- Generate HTML links to other files in the documentation.
@@ -255,4 +284,6 @@ for i=1, #arg do
   generate_documentation(arg[i], path, filename, jump_to)
   print(arg[i]..' --> '..path..'/docs/'..filename:gsub('lua$', 'html'))
 end
-os.execute('cp '..script_path..'/locco.css '..path..'/docs')
+for i,v in ipairs(template.includes) do
+  os.execute('cp '..script_path..'/'.. v..' '..path..'/docs')
+end

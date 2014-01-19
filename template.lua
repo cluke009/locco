@@ -1,30 +1,29 @@
 module(..., package.seeall)
 
+includes = {
+  "locco.css",
+  "monokai_sublime.css",
+  "highlight.pack.js",
+}
+
 header = [[<!DOCTYPE html>
 
 <html>
 <head>
   <title>%title%</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" media="all" href="locco.css" />
+  <link rel="stylesheet" href="locco.css">
+  <link rel="stylesheet" href="monokai_sublime.css">
+  <script src="highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
   <div id="container">
     <div id="background"></div>
     %jump%
-    <table cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th class="docs">
             <h1>
               %title%
             </h1>
-          </th>
-          <th class="code">
-          </th>
-        </tr>
-      </thead>
-      <tbody>
 ]]
 
 jump_start = [[
@@ -45,20 +44,17 @@ jump_end = [[
 ]]
 
 table_entry = [[
-<tr id="section-%index%">
-<td class="docs">
-  <div class="pilwrap">
+<div class="section" id="section-%index%">
+<div class="docs">
     <a class="pilcrow" href="#section-%index%">&#182;</a>
-  </div>
   %docs_html%
-</td>
-<td class="code">
+</div>
+<div class="codes">
   %code_html%
-</td>
-</tr>]]
+</div>
+</div><div class="clear"></div>]]
 
 footer = [[</tbody>
-    </table>
   </div>
 </body>
 </html>]]
